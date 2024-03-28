@@ -1,0 +1,10 @@
+mkdir ~/.config/autostart/
+vi firefox.desktop 
+
+[Desktop Entry]
+Type=Application
+Exec=/usr/lib64/firefox
+Hidden=false
+X-GNOME-Autostart-enabled=true
+Name[en_US]=firefox
+Name=firefox

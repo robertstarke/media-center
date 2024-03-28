@@ -1,0 +1,26 @@
+    Create a new text file, somewhere like your Desktop or home folder named, autoconfig.cfg.
+    Enter these lines into that file:
+
+Updated May 16 2020 for Firefox 76. The new browser version broke the older code. This works well for me now.
+
+// first line is a comment
+var {classes:Cc,interfaces:Ci,utils:Cu} = Components;
+try {
+  Cu.import("resource:///modules/AboutNewTab.jsm");
+  var newTabURL = "file:///C:/Users/yourname/yourfile.html";
+  AboutNewTab.newTabURL = newTabURL;
+} catch(e){Cu.reportError(e);} // report errors in the Browser Console
+
+    Replace “file:///C:/Users/yourname/yourfile.html” with the actual path to your file, something like “file:///homepage.html”, for example.
+    Save that file and then copy it into the root of the Firefox program folder.
+    Create a new text file named autoconfig.js.
+    Enter these lines into that file:
+
+//
+pref("general.config.filename", "autoconfig.cfg");
+pref("general.config.obscure_value", 0);
+pref("general.config.sandbox_enabled", false);
+
+    Save that file and then copy it into the defaults/pref folder under ther Firefox program folder.
+    Disable any tab-related extensions which might change the intended behavior here.
+    Restart Firefox.
