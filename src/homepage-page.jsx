@@ -1,111 +1,123 @@
 import { Page } from "@nakedjsx/core/page";
 
-const tiles = {
-  "Amazon Prime Video": {
-    id: "amazon",
-    link: "https://www.amazon.com/gp/video/storefront/",
-    image: "./img/amazon_prime.svg",
-    accesskey: "7",
-    index: 7,
-  },
-  "Britbox": {
-    id: "britbox",
-    link: "https://www.britbox.com/us/account/watchlist",
-    image: "./img/britbox.svg",
-    accesskey: "9",
-    index: 9,
-  },
-  "Google Play Movies": {
-    id: "google_movies",
-    link: "https://www.youtube.com/feed/storefront?bp=ogUCKAQ%3D",
-    image: "./img/google_movies.png",
-    accesskey: "b",
-    index: 11,
-  },
-  "Google Photos": {
-    id: "google_photos",
-    link: "https://photos.google.com/share/AF1QipOId0QwF_z6l5G8NsGeVGkEk-dCi_ks4bRNtaZ9zjNqHlTdOMx1CQUaoi7U1BZeMw?key=ZVduN0VjNm93R29La1M2QmFxclN3SkxnZHlQRHh3",
-    image: "./img/google_photos.svg",
-    accesskey: "c",
-    index: 12,
-  },
-  KiKa: {
-    id: "kika",
-    link: "https://www.kika.de/die-sendung-mit-dem-elefanten/die-sendung-mit-dem-elefanten-104",
-    image: "./img/kika.svg",
-    accesskey: "4",
-    index: 4,
-  },
-  Netflix: {
-    id: "netflix",
-    link: "https://www.netflix.com",
-    image: "./img/netflix.svg",
-    accesskey: "8",
-    index: 8,
-  },
-  "Paramount +": {
-    id: "paramount",
-    link: "https://www.paramountplus.com",
-    image: "./img/paramount_plus.svg",
+const tiles = [
+  {
+    id: "hulu",
+    name: "HULU",
+    url: "https://www.hulu.com",
+    image: "hulu.svg",
     accesskey: "1",
+    index: 0,
+  },
+  {
+    id: "disney",
+    name: "Disney+",
+    url: "https://www.disneyplus.com/",
+    image: "disney.svg",
+    accesskey: "2",
     index: 1,
   },
-  "PBS": {
-    id: "pbs",
-    link: "https://www.pbs.org/livestream/",
-    image: "./img/pbs.svg",
-    accesskey: "a",
-    index: 10,
-  },
-  "PBS Kids": {
-    id: "pbs-kids",
-    link: "https://www.pbskids.org/video",
-    image: "./img/pbs_kids.svg",
+  {
+    id: "netflix",
+    name: "Netflix",
+    url: "https://www.netflix.com",
+    image: "netflix.svg",
     accesskey: "3",
-    index: 3,
-  },
-  "Sling TV": {
-    id: "sling",
-    link: "https://watch.sling.com/dashboard/home",
-    image: "./img/sling_tv.svg",
-    accesskey: "6",
-    index: 6,
-  },
-  Emby: {
-    id: "emby",
-    link: "http://localhost:8080",
-    image: "./img/emby.png",
-    accesskey: "5",
-    index: 5,
-  },
-  YouTube: {
-    id: "youtube",
-    link: "https://www.youtube.com",
-    image: "./img/youtube.svg",
-    accesskey: "2",
     index: 2,
   },
-};
+  {
+    id: "amazon",
+    name: "Amazon Prime Video",
+    url: "https://www.amazon.com/gp/video/storefront/",
+    image: "amazon_prime.svg",
+    accesskey: "4",
+    index: 3,
+  },
+  {
+    id: "sling",
+    name: "Sling TV",
+    url: "https://watch.sling.com/dashboard/home",
+    image: "sling_tv.svg",
+    accesskey: "5",
+    index: 4,
+  },
+  {
+    id: "paramount",
+    name: "Paramount+",
+    url: "https://www.paramountplus.com",
+    image: "paramount_plus.svg",
+    accesskey: "6",
+    index: 5,
+  },
+  {
+    id: "peacock",
+    name: "Peacock",
+    url: "https://www.peacocktv.com",
+    image: "peacock.svg",
+    accesskey: "7",
+    index: 6,
+  },
+  {
+    id: "max",
+    name: "Max",
+    url: "https://www.max.com",
+    image: "max.svg",
+    accesskey: "8",
+    index: 7,
+  },
+  {
+    id: "appletv",
+    name: "Apple TV+",
+    url: "https://www.apple.com/apple-tv-plus/",
+    image: "appletv.svg",
+    accesskey: "9",
+    index: 8,
+  },
+  {
+    id: "britbox",
+    name: "BritBox",
+    url: "https://www.britbox.com/us/account/watchlist",
+    image: "britbox.svg",
+    accesskey: "a",
+    index: 9,
+  },
+  {
+    id: "youtube",
+    name: "YouTube",
+    url: "https://www.youtube.com",
+    image: "youtube.svg",
+    accesskey: "b",
+    index: 10,
+  },
+  {
+    id: "pbs",
+    name: "PBS",
+    url: "https://www.pbs.org/livestream/",
+    image: "pbs.svg",
+    accesskey: "c",
+    index: 11,
+  },
+];
 
 const getTiles = (tiles) =>
-  Object.entries(tiles).reduce((acc, [section, attributes]) => {
-    acc.push(Section(section, attributes));
+  tiles.reduce((acc, tile) => {
+    acc.push(Tile(tile));
     return acc;
   }, []);
 
-const Section = (section, attributes) => (
+const Tile = (tile) => (
   <a
-    id={attributes.id}
+    id={tile.id}
     class="tile"
-    href={attributes.link}
-    title={section}
-    data-accessKey={attributes.accesskey}
+    href={tile.url}
+    title={tile.name}
+    data-accessKey={tile.accesskey}
     target="_blank"
-    tabIndex={attributes.index}
-    style={`order: ${attributes.index};`}
+    tabIndex={tile.index}
+    style={`order: ${tile.index};`}
   >
-    <img src={attributes.image} alt={section} />
-    <span class="key-hint">{attributes.accesskey}</span>
+    <img src={`./img/${tile.image}`} alt={tile.name} />
+    <span class="key-hint">{tile.accesskey}</span>
   </a>
 );
 

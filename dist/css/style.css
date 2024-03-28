@@ -23,7 +23,7 @@ body {
     display: grid;
     padding: 50px 50px;
     max-width: 450px;
-    height: 180px;
+    height: 220px;
     justify-items: center;
     align-items: center;
     border-radius: 15px;
@@ -34,6 +34,7 @@ body {
     img {
       max-width: 100%;
       max-height: 100%;
+      min-height: 75px;
       transition: max-width 0.25s ease;
     }
 
